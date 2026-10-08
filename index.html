@@ -1,0 +1,828 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Wedding Photo Upload</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f8f5f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      background: white;
+      padding: 35px 25px;
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin: 10px 0 25px;
+      line-height: 1.5;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .camera-btn {
+      background: #222;
+      color: white;
+    }
+
+    .gallery-btn {
+      background: #eee;
+      color: #222;
+    }
+
+    .upload-btn {
+      background: #222;
+      color: white;
+    }
+
+    .upload-btn:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    #photoCount {
+      margin-top: 18px;
+      font-size: 14px;
+      color: #777;
+    }
+
+    #preview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .photo-card {
+      position: relative;
+      aspect-ratio: 1;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .remove-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 27px;
+      height: 27px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    #progressContainer {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #progress {
+      width: 0%;
+      height: 100%;
+      background: #222;
+      transition: width 0.3s ease;
+    }
+
+    #progressText {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+      min-height: 22px;
+    }
+
+    .success {
+      color: #287a45 !important;
+      font-weight: bold;
+    }
+
+    .error {
+      color: #b3261e !important;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #999;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>💍 Our Wedding</h1>
+
+    <p class="subtitle">
+      Share your favourite moments with us ❤️
+    </p>
+
+
+    <!-- CAMERA -->
+
+    <label for="cameraInput" class="button camera-btn">
+      📷 Take a Photo
+    </label>
+
+    <input
+      type="file"
+      id="cameraInput"
+      accept="image/*"
+      capture="environment"
+    >
+
+
+    <!-- GALLERY -->
+
+    <label for="galleryInput" class="button gallery-btn">
+      🖼️ Choose from Gallery
+    </label>
+
+    <input
+      type="file"
+      id="galleryInput"
+      accept="image/*"
+      multiple
+    >
+
+
+    <!-- COUNT -->
+
+    <div id="photoCount">
+      No photos selected
+    </div>
+
+
+    <!-- PREVIEW -->
+
+    <div id="preview"></div>
+
+
+    <!-- UPLOAD -->
+
+    <button
+      id="uploadBtn"
+      class="button upload-btn"
+      disabled
+    >
+      ❤️ Upload Photos
+    </button>
+
+
+    <!-- PROGRESS -->
+
+    <div id="progressContainer">
+
+      <div class="progress-bar">
+        <div id="progress"></div>
+      </div>
+
+      <div id="progressText">
+        0 / 0 photos
+      </div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div id="status"></div>
+
+
+    <div class="note">
+      You can take new photos or choose existing photos
+      from your phone.
+    </div>
+
+  </div>
+
+
+<script>
+
+
+  // ==========================================
+  // GOOGLE APPS SCRIPT URL
+  // ==========================================
+
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbwFCl3B2d1oyBfDUCQwhW8jabSM0v-Ty1ILdFR9w__Q7z8BZ1vDdT_jCntvJfZ6i8QP/exec";
+
+
+  // ==========================================
+  // SETTINGS
+  // ==========================================
+
+  const MAX_PHOTOS = 10;
+
+  const MAX_WIDTH = 2000;
+
+  const JPEG_QUALITY = 0.82;
+
+
+  // ==========================================
+  // ELEMENTS
+  // ==========================================
+
+  const cameraInput =
+    document.getElementById("cameraInput");
+
+  const galleryInput =
+    document.getElementById("galleryInput");
+
+  const preview =
+    document.getElementById("preview");
+
+  const uploadBtn =
+    document.getElementById("uploadBtn");
+
+  const status =
+    document.getElementById("status");
+
+  const photoCount =
+    document.getElementById("photoCount");
+
+  const progressContainer =
+    document.getElementById("progressContainer");
+
+  const progress =
+    document.getElementById("progress");
+
+  const progressText =
+    document.getElementById("progressText");
+
+
+  let selectedFiles = [];
+
+
+  // ==========================================
+  // CAMERA
+  // ==========================================
+
+  cameraInput.addEventListener(
+    "change",
+    function () {
+
+      const files =
+        Array.from(this.files);
+
+      addFiles(files);
+
+      this.value = "";
+
+    }
+  );
+
+
+  // ==========================================
+  // GALLERY
+  // ==========================================
+
+  galleryInput.addEventListener(
+    "change",
+    function () {
+
+      const files =
+        Array.from(this.files);
+
+      addFiles(files);
+
+      this.value = "";
+
+    }
+  );
+
+
+  // ==========================================
+  // ADD FILES
+  // ==========================================
+
+  function addFiles(files) {
+
+    if (files.length === 0) {
+      return;
+    }
+
+
+    if (
+      selectedFiles.length +
+      files.length >
+      MAX_PHOTOS
+    ) {
+
+      status.textContent =
+        `Maximum ${MAX_PHOTOS} photos per upload.`;
+
+      status.className =
+        "error";
+
+      return;
+
+    }
+
+
+    selectedFiles.push(...files);
+
+    renderPreview();
+
+  }
+
+
+  // ==========================================
+  // PREVIEW
+  // ==========================================
+
+  function renderPreview() {
+
+    preview.innerHTML = "";
+
+
+    selectedFiles.forEach(
+      (file, index) => {
+
+        const card =
+          document.createElement("div");
+
+        card.className =
+          "photo-card";
+
+
+        const img =
+          document.createElement("img");
+
+
+        const removeBtn =
+          document.createElement("button");
+
+        removeBtn.className =
+          "remove-btn";
+
+        removeBtn.textContent =
+          "×";
+
+
+        removeBtn.onclick =
+          function () {
+
+            selectedFiles.splice(
+              index,
+              1
+            );
+
+            renderPreview();
+
+          };
+
+
+        card.appendChild(img);
+
+        card.appendChild(removeBtn);
+
+        preview.appendChild(card);
+
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload =
+          function (event) {
+
+            img.src =
+              event.target.result;
+
+          };
+
+
+        reader.readAsDataURL(file);
+
+      }
+    );
+
+
+    updateCount();
+
+  }
+
+
+  // ==========================================
+  // COUNT
+  // ==========================================
+
+  function updateCount() {
+
+    if (selectedFiles.length === 0) {
+
+      photoCount.textContent =
+        "No photos selected";
+
+      uploadBtn.disabled =
+        true;
+
+      return;
+
+    }
+
+
+    photoCount.textContent =
+      `${selectedFiles.length} photo(s) selected`;
+
+
+    uploadBtn.disabled =
+      false;
+
+
+    status.textContent = "";
+
+    status.className = "";
+
+  }
+
+
+  // ==========================================
+  // UPLOAD
+  // ==========================================
+
+  uploadBtn.addEventListener(
+    "click",
+    async function () {
+
+      if (selectedFiles.length === 0) {
+        return;
+      }
+
+
+      uploadBtn.disabled =
+        true;
+
+
+      progressContainer.style.display =
+        "block";
+
+
+      progress.style.width =
+        "0%";
+
+
+      let uploaded = 0;
+
+
+      const total =
+        selectedFiles.length;
+
+
+      for (
+        const file
+        of selectedFiles
+      ) {
+
+        try {
+
+          status.textContent =
+            "Preparing photo...";
+
+
+          const compressed =
+            await compressImage(file);
+
+
+          const base64 =
+            await fileToBase64(
+              compressed
+            );
+
+
+          const payload = {
+
+            fileName:
+              `${Date.now()}_${file.name.replace(/\s+/g, "_")}`,
+
+            mimeType:
+              "image/jpeg",
+
+            data:
+              base64
+
+          };
+
+
+          status.textContent =
+            `Uploading photo ${uploaded + 1}...`;
+
+
+          await fetch(
+            SCRIPT_URL,
+            {
+              method: "POST",
+              body: JSON.stringify(
+                payload
+              )
+            }
+          );
+
+
+          uploaded++;
+
+
+          const percentage =
+            Math.round(
+              (uploaded / total) * 100
+            );
+
+
+          progress.style.width =
+            percentage + "%";
+
+
+          progressText.textContent =
+            `${uploaded} / ${total} photos`;
+
+        }
+
+        catch (error) {
+
+          console.error(error);
+
+
+          status.textContent =
+            "One of the photos failed to upload.";
+
+
+          status.className =
+            "error";
+
+        }
+
+      }
+
+
+      // ======================================
+      // COMPLETE
+      // ======================================
+
+      if (uploaded === total) {
+
+        status.textContent =
+          "❤️ Thank you! All photos uploaded successfully.";
+
+
+        status.className =
+          "success";
+
+
+        selectedFiles = [];
+
+
+        preview.innerHTML =
+          "";
+
+
+        photoCount.textContent =
+          "No photos selected";
+
+
+        cameraInput.value =
+          "";
+
+        galleryInput.value =
+          "";
+
+      }
+
+
+      uploadBtn.disabled =
+        false;
+
+    }
+  );
+
+
+  // ==========================================
+  // COMPRESS IMAGE
+  // ==========================================
+
+  function compressImage(file) {
+
+    return new Promise(
+      (resolve, reject) => {
+
+        const img =
+          new Image();
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload =
+          function (event) {
+
+            img.onload =
+              function () {
+
+                let width =
+                  img.width;
+
+                let height =
+                  img.height;
+
+
+                if (
+                  width >
+                  MAX_WIDTH
+                ) {
+
+                  height =
+                    height *
+                    (
+                      MAX_WIDTH /
+                      width
+                    );
+
+                  width =
+                    MAX_WIDTH;
+
+                }
+
+
+                const canvas =
+                  document.createElement(
+                    "canvas"
+                  );
+
+
+                canvas.width =
+                  width;
+
+                canvas.height =
+                  height;
+
+
+                const ctx =
+                  canvas.getContext(
+                    "2d"
+                  );
+
+
+                ctx.drawImage(
+                  img,
+                  0,
+                  0,
+                  width,
+                  height
+                );
+
+
+                canvas.toBlob(
+                  function (blob) {
+
+                    if (!blob) {
+
+                      reject(
+                        new Error(
+                          "Image compression failed"
+                        )
+                      );
+
+                      return;
+
+                    }
+
+
+                    resolve(blob);
+
+                  },
+                  "image/jpeg",
+                  JPEG_QUALITY
+                );
+
+              };
+
+
+            img.onerror =
+              reject;
+
+
+            img.src =
+              event.target.result;
+
+          };
+
+
+        reader.onerror =
+          reject;
+
+
+        reader.readAsDataURL(file);
+
+      }
+    );
+
+  }
+
+
+  // ==========================================
+  // FILE → BASE64
+  // ==========================================
+
+  function fileToBase64(file) {
+
+    return new Promise(
+      (resolve, reject) => {
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload =
+          function () {
+
+            const result =
+              reader.result;
+
+
+            const base64 =
+              result.split(",")[1];
+
+
+            resolve(base64);
+
+          };
+
+
+        reader.onerror =
+          reject;
+
+
+        reader.readAsDataURL(file);
+
+      }
+    );
+
+  }
+
+</script>
+
+</body>
+</html>
+```
