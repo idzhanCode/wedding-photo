@@ -1,48 +1,199 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Wedding Photo Upload</title>
+  <title>Azleezah & Idzhan | 6 December 2026</title>
 
   <style>
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Arial, sans-serif;
+      font-family: Georgia, "Times New Roman", serif;
       background: #f8f5f0;
+      color: #302d2a;
+    }
+
+    button,
+    label {
+      font-family: inherit;
+    }
+
+    /* ==============================
+       HERO
+    ============================== */
+
+    .hero {
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 20px;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 22px;
+      background:
+        radial-gradient(
+          circle at top,
+          #fffdf9 0%,
+          #f8f3eb 55%,
+          #eee7dc 100%
+        );
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border: 1px solid rgba(120, 100, 75, 0.15);
+      border-radius: 50%;
+    }
+
+    .hero::before {
+      top: -100px;
+      left: -100px;
+    }
+
+    .hero::after {
+      bottom: -100px;
+      right: -100px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 520px;
+      animation: fadeUp 1.2s ease;
+    }
+
+    .small-title {
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #8b7863;
+      margin-bottom: 25px;
+    }
+
+    .rings {
+      font-size: 32px;
+      margin-bottom: 18px;
+    }
+
+    .names {
+      font-size: clamp(42px, 11vw, 68px);
+      font-weight: normal;
+      line-height: 1.05;
+      margin: 0;
+      color: #2e2925;
+    }
+
+    .ampersand {
+      font-style: italic;
+      font-size: 0.65em;
+      color: #9b8064;
+      display: block;
+      margin: 8px 0;
+    }
+
+    .date {
+      margin-top: 28px;
+      font-size: 15px;
+      letter-spacing: 3px;
+      color: #6d6258;
+    }
+
+    .divider {
+      width: 70px;
+      height: 1px;
+      background: #bca98e;
+      margin: 28px auto;
+    }
+
+    .hero-message {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #746b63;
+      margin: 0 auto 30px;
+      max-width: 390px;
+    }
+
+    .start-btn {
+      display: inline-block;
+      text-decoration: none;
+      background: #302d2a;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 40px;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      background: #4a433d;
+    }
+
+
+    /* ==============================
+       UPLOAD SECTION
+    ============================== */
+
+    .upload-section {
+      min-height: 100vh;
+      padding: 70px 20px;
+      background: #fff;
     }
 
     .container {
       width: 100%;
       max-width: 520px;
-      background: white;
-      padding: 35px 25px;
-      border-radius: 22px;
+      margin: auto;
+    }
+
+    .section-heading {
       text-align: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      margin-bottom: 35px;
     }
 
-    h1 {
+    .section-heading .eyebrow {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #9a8065;
+      margin-bottom: 12px;
+    }
+
+    .section-heading h2 {
+      font-size: 32px;
+      font-weight: normal;
+      margin: 0 0 12px;
+    }
+
+    .section-heading p {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #777;
+      line-height: 1.6;
       margin: 0;
-      font-size: 28px;
     }
 
-    .subtitle {
-      color: #666;
-      margin: 10px 0 25px;
-      line-height: 1.5;
-    }
+
+    /* ==============================
+       BUTTONS
+    ============================== */
 
     input[type="file"] {
       display: none;
@@ -51,44 +202,64 @@
     .button {
       display: block;
       width: 100%;
-      padding: 15px;
+      padding: 16px;
       border: none;
-      border-radius: 12px;
-      font-size: 16px;
+      border-radius: 14px;
+      font-size: 15px;
       cursor: pointer;
       margin-top: 12px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .button:active {
+      transform: scale(0.98);
     }
 
     .camera-btn {
-      background: #222;
+      background: #302d2a;
       color: white;
     }
 
     .gallery-btn {
-      background: #eee;
-      color: #222;
+      background: #f1ece5;
+      color: #302d2a;
+      border: 1px solid #e1d8cc;
     }
 
     .upload-btn {
-      background: #222;
+      background: #9b8064;
       color: white;
+      margin-top: 22px;
     }
 
     .upload-btn:disabled {
-      background: #aaa;
+      background: #c9c3bc;
       cursor: not-allowed;
     }
 
+
+    /* ==============================
+       PHOTO COUNT
+    ============================== */
+
     #photoCount {
-      margin-top: 18px;
-      font-size: 14px;
-      color: #777;
+      margin-top: 20px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: #888;
     }
+
+
+    /* ==============================
+       PREVIEW
+    ============================== */
 
     #preview {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 9px;
       margin-top: 20px;
     }
 
@@ -101,32 +272,38 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 12px;
+      display: block;
     }
 
     .remove-btn {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 6px;
+      right: 6px;
       width: 27px;
       height: 27px;
       border: none;
       border-radius: 50%;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.65);
       color: white;
       font-size: 17px;
       cursor: pointer;
     }
 
+
+    /* ==============================
+       PROGRESS
+    ============================== */
+
     #progressContainer {
       display: none;
-      margin-top: 20px;
+      margin-top: 25px;
     }
 
     .progress-bar {
       width: 100%;
-      height: 10px;
-      background: #eee;
+      height: 8px;
+      background: #eee8df;
       border-radius: 10px;
       overflow: hidden;
     }
@@ -134,130 +311,289 @@
     #progress {
       width: 0%;
       height: 100%;
-      background: #222;
+      background: #9b8064;
       transition: width 0.3s ease;
     }
 
     #progressText {
       margin-top: 8px;
-      font-size: 13px;
-      color: #666;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: #777;
     }
+
+
+    /* ==============================
+       STATUS
+    ============================== */
 
     #status {
       margin-top: 20px;
+      text-align: center;
+      font-family: Arial, sans-serif;
       font-size: 14px;
-      color: #555;
       min-height: 22px;
+      line-height: 1.5;
     }
 
     .success {
-      color: #287a45 !important;
+      color: #487354 !important;
       font-weight: bold;
     }
 
     .error {
-      color: #b3261e !important;
+      color: #a94442 !important;
     }
 
-    .note {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #999;
-      line-height: 1.5;
+
+    /* ==============================
+       FOOTER
+    ============================== */
+
+    .footer {
+      text-align: center;
+      padding: 35px 20px 45px;
+      background: #302d2a;
+      color: #ddd;
     }
+
+    .footer-names {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .footer-date {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #aaa;
+    }
+
+
+    /* ==============================
+       ANIMATION
+    ============================== */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    /* ==============================
+       MOBILE
+    ============================== */
+
+    @media (max-width: 380px) {
+
+      .names {
+        font-size: 40px;
+      }
+
+      .hero {
+        padding: 30px 18px;
+      }
+
+      .upload-section {
+        padding: 55px 18px;
+      }
+
+    }
+
   </style>
+
 </head>
 
 <body>
 
-  <div class="container">
+  <!-- =========================================
+       HERO
+  ========================================== -->
 
-    <h1>💍 Our Wedding</h1>
+  <section class="hero">
 
-    <p class="subtitle">
-      Share your favourite moments with us ❤️
+```
+<div class="hero-content">
+
+  <div class="small-title">
+    Together with our families
+  </div>
+
+  <div class="rings">
+    💍
+  </div>
+
+  <h1 class="names">
+    Azleezah
+
+    <span class="ampersand">
+      &amp;
+    </span>
+
+    Idzhan
+  </h1>
+
+  <div class="date">
+    06 • 12 • 2026
+  </div>
+
+  <div class="divider"></div>
+
+  <p class="hero-message">
+    We would love to see the moments
+    you captured on our special day.
+  </p>
+
+  <a
+    href="#upload"
+    class="start-btn"
+  >
+    📷 SHARE YOUR PHOTOS
+  </a>
+
+</div>
+```
+
+  </section>
+
+  <!-- =========================================
+       UPLOAD
+  ========================================== -->
+
+  <section
+    class="upload-section"
+    id="upload"
+  >
+
+```
+<div class="container">
+
+  <div class="section-heading">
+
+    <div class="eyebrow">
+      Our Wedding
+    </div>
+
+    <h2>
+      Share the Moments
+    </h2>
+
+    <p>
+      Take a photo or choose your favourite
+      moments from your gallery.
     </p>
 
-
-    <!-- CAMERA -->
-
-    <label for="cameraInput" class="button camera-btn">
-      📷 Take a Photo
-    </label>
-
-    <input
-      type="file"
-      id="cameraInput"
-      accept="image/*"
-      capture="environment"
-    >
+  </div>
 
 
-    <!-- GALLERY -->
+  <!-- CAMERA -->
 
-    <label for="galleryInput" class="button gallery-btn">
-      🖼️ Choose from Gallery
-    </label>
+  <label
+    for="cameraInput"
+    class="button camera-btn"
+  >
+    📷 Take a Photo
+  </label>
 
-    <input
-      type="file"
-      id="galleryInput"
-      accept="image/*"
-      multiple
-    >
+  <input
+    type="file"
+    id="cameraInput"
+    accept="image/*"
+    capture="environment"
+  >
 
 
-    <!-- COUNT -->
+  <!-- GALLERY -->
 
-    <div id="photoCount">
-      No photos selected
+  <label
+    for="galleryInput"
+    class="button gallery-btn"
+  >
+    🖼️ Choose from Gallery
+  </label>
+
+  <input
+    type="file"
+    id="galleryInput"
+    accept="image/*"
+    multiple
+  >
+
+
+  <!-- COUNT -->
+
+  <div id="photoCount">
+    No photos selected
+  </div>
+
+
+  <!-- PREVIEW -->
+
+  <div id="preview"></div>
+
+
+  <!-- UPLOAD -->
+
+  <button
+    id="uploadBtn"
+    class="button upload-btn"
+    disabled
+  >
+    ❤️ Upload Photos
+  </button>
+
+
+  <!-- PROGRESS -->
+
+  <div id="progressContainer">
+
+    <div class="progress-bar">
+
+      <div id="progress"></div>
+
     </div>
 
-
-    <!-- PREVIEW -->
-
-    <div id="preview"></div>
-
-
-    <!-- UPLOAD -->
-
-    <button
-      id="uploadBtn"
-      class="button upload-btn"
-      disabled
-    >
-      ❤️ Upload Photos
-    </button>
-
-
-    <!-- PROGRESS -->
-
-    <div id="progressContainer">
-
-      <div class="progress-bar">
-        <div id="progress"></div>
-      </div>
-
-      <div id="progressText">
-        0 / 0 photos
-      </div>
-
-    </div>
-
-
-    <!-- STATUS -->
-
-    <div id="status"></div>
-
-
-    <div class="note">
-      You can take new photos or choose existing photos
-      from your phone.
+    <div id="progressText">
+      0 / 0 photos
     </div>
 
   </div>
 
+
+  <!-- STATUS -->
+
+  <div id="status"></div>
+
+</div>
+```
+
+  </section>
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer class="footer">
+
+```
+<div class="footer-names">
+  Azleezah &amp; Idzhan
+</div>
+
+<div class="footer-date">
+  06 DECEMBER 2026
+</div>
+```
+
+  </footer>
 
 <script>
 
@@ -608,7 +944,6 @@
           status.textContent =
             "One of the photos failed to upload.";
 
-
           status.className =
             "error";
 
@@ -624,7 +959,7 @@
       if (uploaded === total) {
 
         status.textContent =
-          "❤️ Thank you! All photos uploaded successfully.";
+          "❤️ Thank you! Your memories are now part of our wedding.";
 
 
         status.className =
@@ -825,4 +1160,3 @@
 
 </body>
 </html>
-```
