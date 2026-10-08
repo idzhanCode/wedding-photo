@@ -2,409 +2,691 @@
 
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Azleezah & Idzhan | 6 December 2026</title>
+  <meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+  <title>Azleezah & Idzhan</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
+
 
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
       margin: 0;
-      min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
       background: #f8f5f0;
       color: #302d2a;
+      font-family: Georgia, "Times New Roman", serif;
     }
 
-    button,
-    label {
-      font-family: inherit;
-    }
 
-    /* ==============================
+    /* =========================================
        HERO
-    ============================== */
+    ========================================== */
 
     .hero {
-      min-height: 100vh;
+
+      min-height: 80vh;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       text-align: center;
-      padding: 40px 22px;
+
+      padding: 40px 20px;
+
       background:
         radial-gradient(
           circle at top,
-          #fffdf9 0%,
-          #f8f3eb 55%,
-          #eee7dc 100%
+          #fffdf9,
+          #f8f3eb 60%,
+          #eee7dc
         );
-      position: relative;
-      overflow: hidden;
+
     }
 
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border: 1px solid rgba(120, 100, 75, 0.15);
-      border-radius: 50%;
-    }
-
-    .hero::before {
-      top: -100px;
-      left: -100px;
-    }
-
-    .hero::after {
-      bottom: -100px;
-      right: -100px;
-    }
 
     .hero-content {
-      position: relative;
-      z-index: 2;
       max-width: 520px;
-      animation: fadeUp 1.2s ease;
     }
 
-    .small-title {
-      font-size: 13px;
+
+    .eyebrow {
+
+      font-family: Arial, sans-serif;
+
+      font-size: 11px;
+
       letter-spacing: 4px;
+
       text-transform: uppercase;
-      color: #8b7863;
-      margin-bottom: 25px;
+
+      color: #947b61;
+
+      margin-bottom: 20px;
+
     }
+
 
     .rings {
+
       font-size: 32px;
-      margin-bottom: 18px;
+
+      margin-bottom: 15px;
+
     }
+
 
     .names {
-      font-size: clamp(42px, 11vw, 68px);
+
+      font-size: clamp(
+        42px,
+        11vw,
+        68px
+      );
+
       font-weight: normal;
-      line-height: 1.05;
+
+      line-height: 1;
+
       margin: 0;
-      color: #2e2925;
+
     }
+
 
     .ampersand {
-      font-style: italic;
-      font-size: 0.65em;
-      color: #9b8064;
+
       display: block;
-      margin: 8px 0;
+
+      font-size: 0.55em;
+
+      font-style: italic;
+
+      color: #9b8064;
+
+      margin: 10px 0;
+
     }
+
 
     .date {
+
       margin-top: 28px;
-      font-size: 15px;
-      letter-spacing: 3px;
-      color: #6d6258;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 13px;
+
+      letter-spacing: 4px;
+
+      color: #756b63;
+
     }
+
 
     .divider {
-      width: 70px;
+
+      width: 60px;
+
       height: 1px;
+
       background: #bca98e;
+
       margin: 28px auto;
+
     }
 
-    .hero-message {
-      font-size: 15px;
-      line-height: 1.8;
+
+    .hero-text {
+
       color: #746b63;
-      margin: 0 auto 30px;
-      max-width: 390px;
+
+      line-height: 1.7;
+
+      font-size: 15px;
+
+      margin-bottom: 30px;
+
     }
 
-    .start-btn {
+
+    .hero-button {
+
       display: inline-block;
-      text-decoration: none;
-      background: #302d2a;
-      color: white;
-      padding: 15px 30px;
+
+      padding: 15px 28px;
+
       border-radius: 40px;
-      font-size: 13px;
+
+      background: #302d2a;
+
+      color: white;
+
+      text-decoration: none;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 12px;
+
       letter-spacing: 1.5px;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
 
-    .start-btn:hover {
-      transform: translateY(-2px);
-      background: #4a433d;
     }
 
 
-    /* ==============================
-       UPLOAD SECTION
-    ============================== */
 
-    .upload-section {
-      min-height: 100vh;
+    /* =========================================
+       GENERAL SECTION
+    ========================================== */
+
+    .section {
+
+      background: white;
+
       padding: 70px 20px;
-      background: #fff;
+
     }
+
 
     .container {
-      width: 100%;
+
       max-width: 520px;
+
       margin: auto;
+
     }
 
-    .section-heading {
+
+    .section-title {
+
       text-align: center;
-      margin-bottom: 35px;
+
+      margin-bottom: 30px;
+
     }
 
-    .section-heading .eyebrow {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #9a8065;
-      margin-bottom: 12px;
-    }
 
-    .section-heading h2 {
-      font-size: 32px;
-      font-weight: normal;
-      margin: 0 0 12px;
-    }
+    .section-title small {
 
-    .section-heading p {
+      display: block;
+
       font-family: Arial, sans-serif;
-      font-size: 14px;
-      color: #777;
-      line-height: 1.6;
-      margin: 0;
+
+      font-size: 10px;
+
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
+
+      color: #9b8064;
+
+      margin-bottom: 10px;
+
     }
 
 
-    /* ==============================
+    .section-title h2 {
+
+      font-size: 32px;
+
+      font-weight: normal;
+
+      margin: 0 0 10px;
+
+    }
+
+
+    .section-title p {
+
+      font-family: Arial, sans-serif;
+
+      color: #777;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+      margin: 0;
+
+    }
+
+
+
+    /* =========================================
        BUTTONS
-    ============================== */
+    ========================================== */
 
     input[type="file"] {
       display: none;
     }
 
+
     .button {
+
       display: block;
+
       width: 100%;
+
       padding: 16px;
+
       border: none;
-      border-radius: 14px;
-      font-size: 15px;
-      cursor: pointer;
+
+      border-radius: 13px;
+
       margin-top: 12px;
+
+      cursor: pointer;
+
       text-align: center;
-      transition: transform 0.2s ease;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 14px;
+
     }
 
-    .button:active {
-      transform: scale(0.98);
-    }
 
     .camera-btn {
+
       background: #302d2a;
+
       color: white;
+
     }
+
 
     .gallery-btn {
-      background: #f1ece5;
+
+      background: #f0ebe4;
+
       color: #302d2a;
-      border: 1px solid #e1d8cc;
+
+      border: 1px solid #ded5ca;
+
     }
+
 
     .upload-btn {
+
       background: #9b8064;
+
       color: white;
-      margin-top: 22px;
+
+      margin-top: 20px;
+
     }
+
 
     .upload-btn:disabled {
-      background: #c9c3bc;
+
+      background: #bbb;
+
       cursor: not-allowed;
+
     }
 
 
-    /* ==============================
-       PHOTO COUNT
-    ============================== */
+
+    /* =========================================
+       COUNT
+    ========================================== */
 
     #photoCount {
-      margin-top: 20px;
+
       text-align: center;
+
       font-family: Arial, sans-serif;
-      font-size: 13px;
+
       color: #888;
+
+      font-size: 13px;
+
+      margin-top: 20px;
+
     }
 
 
-    /* ==============================
+
+    /* =========================================
        PREVIEW
-    ============================== */
+    ========================================== */
 
     #preview {
+
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 9px;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 8px;
+
       margin-top: 20px;
+
     }
+
 
     .photo-card {
+
       position: relative;
+
       aspect-ratio: 1;
+
     }
+
 
     .photo-card img {
+
       width: 100%;
+
       height: 100%;
+
       object-fit: cover;
-      border-radius: 12px;
-      display: block;
+
+      border-radius: 10px;
+
     }
+
 
     .remove-btn {
+
       position: absolute;
-      top: 6px;
-      right: 6px;
+
+      top: 5px;
+
+      right: 5px;
+
       width: 27px;
+
       height: 27px;
+
       border: none;
+
       border-radius: 50%;
-      background: rgba(0,0,0,0.65);
+
+      background:
+        rgba(0,0,0,0.7);
+
       color: white;
+
       font-size: 17px;
+
       cursor: pointer;
+
     }
 
 
-    /* ==============================
+
+    /* =========================================
        PROGRESS
-    ============================== */
+    ========================================== */
 
     #progressContainer {
+
       display: none;
-      margin-top: 25px;
+
+      margin-top: 20px;
+
     }
+
 
     .progress-bar {
-      width: 100%;
+
       height: 8px;
-      background: #eee8df;
-      border-radius: 10px;
+
+      background: #eee;
+
+      border-radius: 20px;
+
       overflow: hidden;
+
     }
+
 
     #progress {
+
       width: 0%;
+
       height: 100%;
+
       background: #9b8064;
-      transition: width 0.3s ease;
+
+      transition:
+        width 0.3s ease;
+
     }
+
 
     #progressText {
-      margin-top: 8px;
+
       text-align: center;
+
       font-family: Arial, sans-serif;
+
       font-size: 12px;
+
       color: #777;
+
+      margin-top: 7px;
+
     }
 
-
-    /* ==============================
-       STATUS
-    ============================== */
 
     #status {
-      margin-top: 20px;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
+
       min-height: 22px;
-      line-height: 1.5;
+
+      text-align: center;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 13px;
+
+      margin-top: 18px;
+
     }
+
 
     .success {
-      color: #487354 !important;
+
+      color: #39704c !important;
+
       font-weight: bold;
+
     }
+
 
     .error {
-      color: #a94442 !important;
+
+      color: #a33 !important;
+
     }
 
 
-    /* ==============================
-       FOOTER
-    ============================== */
 
-    .footer {
+    /* =========================================
+       GALLERY
+    ========================================== */
+
+    .gallery-section {
+
+      background: #f8f5f0;
+
+    }
+
+
+    #galleryStatus {
+
       text-align: center;
-      padding: 35px 20px 45px;
-      background: #302d2a;
-      color: #ddd;
-    }
 
-    .footer-names {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .footer-date {
       font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
+
+      font-size: 13px;
+
+      color: #888;
+
+      margin-bottom: 20px;
+
+    }
+
+
+    #gallery {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 8px;
+
+    }
+
+
+    .gallery-item {
+
+      width: 100%;
+
+      aspect-ratio: 1;
+
+      object-fit: cover;
+
+      border-radius: 10px;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s ease;
+
+      background: #eee;
+
+    }
+
+
+    .gallery-item:hover {
+
+      transform: scale(1.02);
+
+    }
+
+
+
+    /* =========================================
+       LIGHTBOX
+    ========================================== */
+
+    #lightbox {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(0,0,0,0.92);
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      z-index: 9999;
+
+      padding: 20px;
+
+    }
+
+
+    #lightbox img {
+
+      max-width: 100%;
+
+      max-height: 90vh;
+
+      object-fit: contain;
+
+      border-radius: 4px;
+
+    }
+
+
+    #closeLightbox {
+
+      position: absolute;
+
+      top: 20px;
+
+      right: 20px;
+
+      width: 42px;
+
+      height: 42px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,0.15);
+
+      color: white;
+
+      font-size: 26px;
+
+      cursor: pointer;
+
+    }
+
+
+
+    /* =========================================
+       FOOTER
+    ========================================== */
+
+    footer {
+
+      background: #302d2a;
+
+      color: white;
+
+      text-align: center;
+
+      padding: 35px 20px;
+
+    }
+
+
+    footer .footer-names {
+
+      font-size: 24px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    footer small {
+
+      font-family: Arial, sans-serif;
+
       color: #aaa;
-    }
 
+      letter-spacing: 3px;
 
-    /* ==============================
-       ANIMATION
-    ============================== */
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-
-    /* ==============================
-       MOBILE
-    ============================== */
-
-    @media (max-width: 380px) {
-
-      .names {
-        font-size: 40px;
-      }
-
-      .hero {
-        padding: 30px 18px;
-      }
-
-      .upload-section {
-        padding: 55px 18px;
-      }
+      font-size: 10px;
 
     }
 
@@ -420,10 +702,10 @@
 
   <section class="hero">
 
-
+```
 <div class="hero-content">
 
-  <div class="small-title">
+  <div class="eyebrow">
     Together with our families
   </div>
 
@@ -432,6 +714,7 @@
   </div>
 
   <h1 class="names">
+
     Azleezah
 
     <span class="ampersand">
@@ -439,56 +722,64 @@
     </span>
 
     Idzhan
+
   </h1>
+
 
   <div class="date">
     06 • 12 • 2026
   </div>
 
+
   <div class="divider"></div>
 
-  <p class="hero-message">
-    We would love to see the moments
-    you captured on our special day.
+
+  <p class="hero-text">
+
+    Thank you for being part of
+    our special day.
+
   </p>
+
 
   <a
     href="#upload"
-    class="start-btn"
+    class="hero-button"
   >
-    📷 SHARE YOUR PHOTOS
+    SHARE YOUR PHOTOS
   </a>
 
 </div>
-
+```
 
   </section>
 
   <!-- =========================================
-       UPLOAD
+       UPLOAD SECTION
   ========================================== -->
 
   <section
-    class="upload-section"
+    class="section"
     id="upload"
   >
 
-
+```
 <div class="container">
 
-  <div class="section-heading">
+  <div class="section-title">
 
-    <div class="eyebrow">
+    <small>
       Our Wedding
-    </div>
+    </small>
 
     <h2>
       Share the Moments
     </h2>
 
     <p>
-      Take a photo or choose your favourite
-      moments from your gallery.
+      Capture a moment or choose
+      your favourite photos from
+      your gallery.
     </p>
 
   </div>
@@ -503,6 +794,7 @@
     📷 Take a Photo
   </label>
 
+
   <input
     type="file"
     id="cameraInput"
@@ -511,7 +803,7 @@
   >
 
 
-  <!-- GALLERY -->
+  <!-- GALLERY INPUT -->
 
   <label
     for="galleryInput"
@@ -519,6 +811,7 @@
   >
     🖼️ Choose from Gallery
   </label>
+
 
   <input
     type="file"
@@ -528,19 +821,13 @@
   >
 
 
-  <!-- COUNT -->
-
   <div id="photoCount">
     No photos selected
   </div>
 
 
-  <!-- PREVIEW -->
-
   <div id="preview"></div>
 
-
-  <!-- UPLOAD -->
 
   <button
     id="uploadBtn"
@@ -551,8 +838,6 @@
   </button>
 
 
-  <!-- PROGRESS -->
-
   <div id="progressContainer">
 
     <div class="progress-bar">
@@ -561,6 +846,7 @@
 
     </div>
 
+
     <div id="progressText">
       0 / 0 photos
     </div>
@@ -568,29 +854,90 @@
   </div>
 
 
-  <!-- STATUS -->
-
   <div id="status"></div>
 
 </div>
-
+```
 
   </section>
+
+  <!-- =========================================
+       GALLERY SECTION
+  ========================================== -->
+
+  <section
+    class="section gallery-section"
+    id="gallerySection"
+  >
+
+```
+<div class="container">
+
+  <div class="section-title">
+
+    <small>
+      Memories
+    </small>
+
+    <h2>
+      Our Wedding Gallery
+    </h2>
+
+    <p>
+      Moments captured by our
+      family and friends.
+    </p>
+
+  </div>
+
+
+  <div id="galleryStatus">
+    Loading photos...
+  </div>
+
+
+  <div id="gallery"></div>
+
+</div>
+```
+
+  </section>
+
+  <!-- =========================================
+       LIGHTBOX
+  ========================================== -->
+
+  <div id="lightbox">
+
+```
+<button id="closeLightbox">
+  ×
+</button>
+
+<img
+  id="lightboxImage"
+  src=""
+  alt="Wedding photo"
+>
+```
+
+  </div>
 
   <!-- =========================================
        FOOTER
   ========================================== -->
 
-  <footer class="footer">
+  <footer>
 
-
+```
 <div class="footer-names">
   Azleezah &amp; Idzhan
 </div>
 
-<div class="footer-date">
+<small>
   06 DECEMBER 2026
-</div>
+</small>
+```
 
   </footer>
 
@@ -598,7 +945,7 @@
 
 
   // ==========================================
-  // GOOGLE APPS SCRIPT URL
+  // GOOGLE APPS SCRIPT
   // ==========================================
 
   const SCRIPT_URL =
@@ -616,39 +963,97 @@
   const JPEG_QUALITY = 0.82;
 
 
+
   // ==========================================
   // ELEMENTS
   // ==========================================
 
   const cameraInput =
-    document.getElementById("cameraInput");
+    document.getElementById(
+      "cameraInput"
+    );
+
 
   const galleryInput =
-    document.getElementById("galleryInput");
+    document.getElementById(
+      "galleryInput"
+    );
+
 
   const preview =
-    document.getElementById("preview");
+    document.getElementById(
+      "preview"
+    );
+
 
   const uploadBtn =
-    document.getElementById("uploadBtn");
+    document.getElementById(
+      "uploadBtn"
+    );
+
 
   const status =
-    document.getElementById("status");
+    document.getElementById(
+      "status"
+    );
+
 
   const photoCount =
-    document.getElementById("photoCount");
+    document.getElementById(
+      "photoCount"
+    );
+
 
   const progressContainer =
-    document.getElementById("progressContainer");
+    document.getElementById(
+      "progressContainer"
+    );
+
 
   const progress =
-    document.getElementById("progress");
+    document.getElementById(
+      "progress"
+    );
+
 
   const progressText =
-    document.getElementById("progressText");
+    document.getElementById(
+      "progressText"
+    );
+
+
+  const gallery =
+    document.getElementById(
+      "gallery"
+    );
+
+
+  const galleryStatus =
+    document.getElementById(
+      "galleryStatus"
+    );
+
+
+  const lightbox =
+    document.getElementById(
+      "lightbox"
+    );
+
+
+  const lightboxImage =
+    document.getElementById(
+      "lightboxImage"
+    );
+
+
+  const closeLightbox =
+    document.getElementById(
+      "closeLightbox"
+    );
 
 
   let selectedFiles = [];
+
 
 
   // ==========================================
@@ -660,9 +1065,13 @@
     function () {
 
       const files =
-        Array.from(this.files);
+        Array.from(
+          this.files
+        );
+
 
       addFiles(files);
+
 
       this.value = "";
 
@@ -670,8 +1079,9 @@
   );
 
 
+
   // ==========================================
-  // GALLERY
+  // GALLERY INPUT
   // ==========================================
 
   galleryInput.addEventListener(
@@ -679,14 +1089,19 @@
     function () {
 
       const files =
-        Array.from(this.files);
+        Array.from(
+          this.files
+        );
+
 
       addFiles(files);
+
 
       this.value = "";
 
     }
   );
+
 
 
   // ==========================================
@@ -695,8 +1110,12 @@
 
   function addFiles(files) {
 
-    if (files.length === 0) {
+    if (
+      files.length === 0
+    ) {
+
       return;
+
     }
 
 
@@ -709,19 +1128,25 @@
       status.textContent =
         `Maximum ${MAX_PHOTOS} photos per upload.`;
 
+
       status.className =
         "error";
+
 
       return;
 
     }
 
 
-    selectedFiles.push(...files);
+    selectedFiles.push(
+      ...files
+    );
+
 
     renderPreview();
 
   }
+
 
 
   // ==========================================
@@ -737,21 +1162,30 @@
       (file, index) => {
 
         const card =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         card.className =
           "photo-card";
 
 
         const img =
-          document.createElement("img");
+          document.createElement(
+            "img"
+          );
 
 
         const removeBtn =
-          document.createElement("button");
+          document.createElement(
+            "button"
+          );
+
 
         removeBtn.className =
           "remove-btn";
+
 
         removeBtn.textContent =
           "×";
@@ -765,16 +1199,25 @@
               1
             );
 
+
             renderPreview();
 
           };
 
 
-        card.appendChild(img);
+        card.appendChild(
+          img
+        );
 
-        card.appendChild(removeBtn);
 
-        preview.appendChild(card);
+        card.appendChild(
+          removeBtn
+        );
+
+
+        preview.appendChild(
+          card
+        );
 
 
         const reader =
@@ -790,7 +1233,9 @@
           };
 
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(
+          file
+        );
 
       }
     );
@@ -801,19 +1246,24 @@
   }
 
 
+
   // ==========================================
   // COUNT
   // ==========================================
 
   function updateCount() {
 
-    if (selectedFiles.length === 0) {
+    if (
+      selectedFiles.length === 0
+    ) {
 
       photoCount.textContent =
         "No photos selected";
 
+
       uploadBtn.disabled =
         true;
+
 
       return;
 
@@ -828,11 +1278,15 @@
       false;
 
 
-    status.textContent = "";
+    status.textContent =
+      "";
 
-    status.className = "";
+
+    status.className =
+      "";
 
   }
+
 
 
   // ==========================================
@@ -843,8 +1297,12 @@
     "click",
     async function () {
 
-      if (selectedFiles.length === 0) {
+      if (
+        selectedFiles.length === 0
+      ) {
+
         return;
+
       }
 
 
@@ -879,7 +1337,9 @@
 
 
           const compressed =
-            await compressImage(file);
+            await compressImage(
+              file
+            );
 
 
           const base64 =
@@ -909,10 +1369,15 @@
           await fetch(
             SCRIPT_URL,
             {
-              method: "POST",
-              body: JSON.stringify(
-                payload
-              )
+
+              method:
+                "POST",
+
+              body:
+                JSON.stringify(
+                  payload
+                )
+
             }
           );
 
@@ -922,7 +1387,8 @@
 
           const percentage =
             Math.round(
-              (uploaded / total) * 100
+              (uploaded / total) *
+              100
             );
 
 
@@ -937,11 +1403,14 @@
 
         catch (error) {
 
-          console.error(error);
+          console.error(
+            error
+          );
 
 
           status.textContent =
             "One of the photos failed to upload.";
+
 
           status.className =
             "error";
@@ -951,11 +1420,9 @@
       }
 
 
-      // ======================================
-      // COMPLETE
-      // ======================================
-
-      if (uploaded === total) {
+      if (
+        uploaded === total
+      ) {
 
         status.textContent =
           "❤️ Thank you! Your memories are now part of our wedding.";
@@ -979,8 +1446,17 @@
         cameraInput.value =
           "";
 
+
         galleryInput.value =
           "";
+
+
+        // Refresh gallery
+
+        setTimeout(
+          loadGallery,
+          1000
+        );
 
       }
 
@@ -992,6 +1468,7 @@
   );
 
 
+
   // ==========================================
   // COMPRESS IMAGE
   // ==========================================
@@ -999,10 +1476,14 @@
   function compressImage(file) {
 
     return new Promise(
-      (resolve, reject) => {
+      (
+        resolve,
+        reject
+      ) => {
 
         const img =
           new Image();
+
 
         const reader =
           new FileReader();
@@ -1016,6 +1497,7 @@
 
                 let width =
                   img.width;
+
 
                 let height =
                   img.height;
@@ -1033,6 +1515,7 @@
                       width
                     );
 
+
                   width =
                     MAX_WIDTH;
 
@@ -1047,6 +1530,7 @@
 
                 canvas.width =
                   width;
+
 
                 canvas.height =
                   height;
@@ -1078,16 +1562,22 @@
                         )
                       );
 
+
                       return;
 
                     }
 
 
-                    resolve(blob);
+                    resolve(
+                      blob
+                    );
 
                   },
+
                   "image/jpeg",
+
                   JPEG_QUALITY
+
                 );
 
               };
@@ -1107,12 +1597,15 @@
           reject;
 
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(
+          file
+        );
 
       }
     );
 
   }
+
 
 
   // ==========================================
@@ -1122,7 +1615,10 @@
   function fileToBase64(file) {
 
     return new Promise(
-      (resolve, reject) => {
+      (
+        resolve,
+        reject
+      ) => {
 
         const reader =
           new FileReader();
@@ -1136,10 +1632,14 @@
 
 
             const base64 =
-              result.split(",")[1];
+              result.split(
+                ","
+              )[1];
 
 
-            resolve(base64);
+            resolve(
+              base64
+            );
 
           };
 
@@ -1148,12 +1648,178 @@
           reject;
 
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(
+          file
+        );
 
       }
     );
 
   }
+
+
+
+  // ==========================================
+  // LOAD GALLERY
+  // ==========================================
+
+  async function loadGallery() {
+
+    galleryStatus.textContent =
+      "Loading photos...";
+
+
+    gallery.innerHTML =
+      "";
+
+
+    try {
+
+      const response =
+        await fetch(
+          SCRIPT_URL +
+          "?action=gallery"
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        !data.success
+      ) {
+
+        throw new Error(
+          "Gallery API failed"
+        );
+
+      }
+
+
+      if (
+        data.photos.length === 0
+      ) {
+
+        galleryStatus.textContent =
+          "No photos yet. Be the first to share a moment! ❤️";
+
+
+        return;
+
+      }
+
+
+      galleryStatus.textContent =
+        `${data.photos.length} photo(s) shared`;
+
+
+      data.photos.forEach(
+        photo => {
+
+          const img =
+            document.createElement(
+              "img"
+            );
+
+
+          img.className =
+            "gallery-item";
+
+
+          img.src =
+            photo.image;
+
+
+          img.alt =
+            "Wedding photo";
+
+
+          img.loading =
+            "lazy";
+
+
+          img.onclick =
+            function () {
+
+              lightboxImage.src =
+                photo.image;
+
+
+              lightbox.style.display =
+                "flex";
+
+            };
+
+
+          gallery.appendChild(
+            img
+          );
+
+        }
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(
+        error
+      );
+
+
+      galleryStatus.textContent =
+        "Unable to load the gallery right now.";
+
+    }
+
+  }
+
+
+
+  // ==========================================
+  // LIGHTBOX
+  // ==========================================
+
+  closeLightbox.onclick =
+    function () {
+
+      lightbox.style.display =
+        "none";
+
+
+      lightboxImage.src =
+        "";
+
+    };
+
+
+  lightbox.onclick =
+    function (event) {
+
+      if (
+        event.target ===
+        lightbox
+      ) {
+
+        lightbox.style.display =
+          "none";
+
+
+        lightboxImage.src =
+          "";
+
+      }
+
+    };
+
+
+
+  // ==========================================
+  // LOAD GALLERY ON PAGE LOAD
+  // ==========================================
+
+  loadGallery();
 
 </script>
 
